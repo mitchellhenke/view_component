@@ -26,7 +26,7 @@ module ViewComponent
           test_controller: "ApplicationController",
           default_preview_layout: nil,
           capture_compatibility_patch_enabled: false,
-          frozen_string_literal: false
+          frozen_string_literal: Rails.application.config.action_view.frozen_string_literal
         })
       end
 
