@@ -10,6 +10,10 @@ nav_order: 5
 
 ## main
 
+* Add configuration and support for compiling templates with `frozen_string_literal` magic comment
+
+    *Mitchell Henke*
+
 * Document the capture compatibility patch on the Known issues page
 
     *Simon Fish*
