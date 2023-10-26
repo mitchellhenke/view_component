@@ -10,6 +10,10 @@ nav_order: 5
 
 ## main
 
+* Add configuration and support for compiling templates with `frozen_string_literal` magic comment.
+
+    *Mitchell Henke*
+
 ## 3.7.0
 
 * Support Rails 7.1 in CI.
