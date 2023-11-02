@@ -34,6 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "concurrent-ruby", "~> 1.0"
   spec.add_development_dependency "appraisal", "~> 2.4"
   spec.add_development_dependency "benchmark-ips", "~> 2.12.0"
+  spec.add_development_dependency "memory_profiler", "~> 1.0"
   spec.add_development_dependency "better_html"
   spec.add_development_dependency "bundler", "~> 2"
   spec.add_development_dependency "erb_lint"
