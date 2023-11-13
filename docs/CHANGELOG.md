@@ -10,6 +10,10 @@ nav_order: 5
 
 ## main
 
+* Avoid duplicating rendered string when `output_postamble` is blank
+
+    *Mitchell Henke*
+
 * Remove unsupported versions of Rails & Ruby from CI matrix.
 
     *Reegan Viljoen*
