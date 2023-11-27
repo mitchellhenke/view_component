@@ -104,7 +104,7 @@ module ViewComponent
       before_render
 
       if render?
-        if output_postamble.blank?
+        if controller.skip && output_postamble.blank?
           render_template_for(@__vc_variant).to_s
         else
           render_template_for(@__vc_variant).to_s + output_postamble

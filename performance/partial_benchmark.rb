@@ -15,19 +15,51 @@ module Performance
   require_relative "components/inline_component"
 end
 
-class BenchmarksController < ActionController::Base
+class SkipBenchmarksController < ActionController::Base
+  def skip
+    true
+  end
 end
 
-BenchmarksController.view_paths = [File.expand_path("./views", __dir__)]
-controller_view = BenchmarksController.new.view_context
+class NoSkipBenchmarksController < ActionController::Base
+  def skip
+    false
+  end
+end
+
+SkipBenchmarksController.view_paths = [File.expand_path("./views", __dir__)]
+NoSkipBenchmarksController.view_paths = [File.expand_path("./views", __dir__)]
+skip_controller_view = SkipBenchmarksController.new.view_context
+no_skip_controller_view = NoSkipBenchmarksController.new.view_context
 
 Benchmark.ips do |x|
   x.time = 10
   x.warmup = 2
 
-  x.report("component") { controller_view.render(Performance::NameComponent.new(name: "Fox Mulder")) }
-  x.report("inline") { controller_view.render(Performance::InlineComponent.new(name: "Fox Mulder")) }
-  x.report("partial") { controller_view.render("partial", name: "Fox Mulder") }
+  x.report("component no skip") { no_skip_controller_view.render(Performance::NameComponent.new(name: "Fox Mulder")) }
+  x.report("component skip") { skip_controller_view.render(Performance::NameComponent.new(name: "Fox Mulder")) }
+
+  x.compare!
+end
+
+
+Benchmark.ips do |x|
+  x.time = 10
+  x.warmup = 2
+
+  x.report("inline no skip") { no_skip_controller_view.render(Performance::InlineComponent.new(name: "Fox Mulder")) }
+  x.report("inline skip") { skip_controller_view.render(Performance::InlineComponent.new(name: "Fox Mulder")) }
+
+  x.compare!
+end
+
+
+Benchmark.ips do |x|
+  x.time = 10
+  x.warmup = 2
+
+  x.report("partial no skip") { no_skip_controller_view.render("partial", name: "Fox Mulder") }
+  x.report("partial skip") { skip_controller_view.render("partial", name: "Fox Mulder") }
 
   x.compare!
 end
